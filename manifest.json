@@ -1,0 +1,30 @@
+{
+  "name": "T114 Validation Helper",
+  "description" : "T114 Validation Helper",
+  "version": "1.0",
+  "manifest_version": 3,
+  "background": {  
+  },  
+  "action": {
+    "default_title": "My Bookmarks",
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+  	"bookmarks",
+  	"storage",
+    "activeTab",
+    "system.cpu",
+    "system.memory",
+    "system.storage",
+    "system.display",
+    "tabs",
+    "scripting",
+  	"webRequest"	
+  ],     
+  "host_permissions": [
+  	"*://*.daum.net/*",
+  	"*://*.naver.com/*",
+  	"*://*.google.com/*"
+  ]
+}

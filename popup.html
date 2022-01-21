@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ko"> 
+<head>
+  <meta charset="utf-8"> 
+  <!--
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-eval' ; object-src 'self'; ">
+  -->
+  <link rel="stylesheet" href="third-party/jquery-ui.css">
+  <link rel="stylesheet" href="third-party/jquery-ui.structure.css">
+  <link rel="stylesheet" href="third-party/jquery-ui.theme.css">
+  <link rel="stylesheet" href="popup.css">
+  <script src="third-party/jquery-1.12.4.js"></script>
+  <script src="third-party/jquery-ui-1.12.1.js"></script>
+  <style>
+  table { width:100%; border-collapse: collapse; border: 1px solid black; }
+  table td, th { padding-left: 5px; border : 1px solid black; height: 30px; }
+  
+  div.search_view {
+	overflow:scroll; display:inline-block; width:330px; height:500px;
+  }
+  
+  div.left_menu {
+  	overflow:auto; 
+  	display:inline-block; 
+  	width:120px; 
+  	height:500px; 
+  	border: 3px solid gray;
+  }
+  
+  div.popup_bg {
+  	display:none; 
+    position: absolute;
+    top : 0px;
+    width: 100%;
+    height: 100%;
+    opacity: 0.75;
+    background-color: #343434;
+  }
+  
+  div.popup {
+  	display:none; 
+  	overflow:scroll;
+    position: absolute;
+    top: 20px;
+    left: 40px;
+    width: 650px;
+    height: 450px;    
+    margin : 20px;    
+    padding: 20px;
+    
+    border-radius: 5px;
+    box-shadow: 5px 3px 3px 0 rgba(212, 212, 212, 0.55);
+    border: solid 1px #d4d4d4;
+    background-color: #fff;  	
+  }
+  
+  input.menus {
+  	width:95%; 
+  	margin: 3px;
+  }
+  </style>
+</head>
+<body style="width: 870px">
+  <div style="margin: 10px; text-align : center;">	
+	전화번호 검색: <input id="search" placeholder="전화번호 입력">
+	<input type="button" value="통합검색" id="single_search">
+  </div>  
+  
+  <div class="left_menu">
+	<textarea id="textarea_input" rows="4" cols="12" style="width:95%">021112222
+03122223333
+0514449999
+</textarea>
+	<input type="button" class="menus" value="번호생성" id="parsing">
+	<input type="button" class="menus" value="결과저장" id="saveData">
+	<input type="button" class="menus" value="결과로드" id="loadData">	
+	<input type="button" class="menus" value="결과출력" id="printData">	
+	<!--
+	<input type="button" value="초기화" id="reset" style="width:95%; margin: 3px;">
+	-->
+	<!--
+	<form name="frmData" action="print.html" method="post" target="popup">
+		<input type="hidden" name="report" id="report">		
+	</form>
+	-->
+
+	<table id="phoneList">		
+	</table>
+  </div>
+  
+  <div class="search_view" style="border: 3px solid #19CE60;">
+	<h3 style="background-color: #19CE60">NAVER</h3>
+	<div id="naver_view"></div>
+  </div>
+  
+  <div class="search_view" style="border: 3px solid #FFE500;">
+	<h3 style="background-color: #FFE500">DAUM</h3>
+	<div id="daum_view"></div>
+  </div>
+    
+    
+  <div id="popup_bg" class="popup_bg"></div>
+  <div id="popup" class="popup">
+	<input type="button" value="X" id="popupClose" style="float:right;">	
+	<table style="font-size:11px;">		
+		<thead>
+			<th>No</th>
+			<th>전화번호</th>
+			<th>NAVER<br>업체명</th>
+			<th>NAVER<br>카테고리</th>
+			<th>NAVER<br>주소</th>
+			<th>DAUM<br>업체명</th>
+			<th>DAUM<br>카테고리</th>
+			<th>DAUM<br>주소</th>
+		</thead>
+		<tbody id="report">			
+		</tbody>
+	</table>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>
