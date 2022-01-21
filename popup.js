@@ -112,7 +112,7 @@ $('#printData').click(function () {
 $('#saveData').click(function () {
 	var todayDate = getToday();
 	localStorage.setItem( todayDate, JSON.stringify( oReportData ));	
-	alert("저장하였습니다");
+	alert("검색 결과가 저장 되었습니다.");
 });
 
 // 데이터로드
@@ -158,11 +158,35 @@ $('#loadData').click(function () {
 	}
 });
 
+function searchAutoList( idx ){
+	var phoneNum = $("#phoneList tr:eq(" + idx + ") td").attr("id");
+	searchMulti( phoneNum );
+}
+
 // 통합 검색
 $('#single_search').click(function () {		
 		// plain/text 형태로 가져옴. 돔으로 검색할수 있는 형태 필요함.
 		var phoneNum = $("#search").val(); //'0616821577';
-		searchMulti( phoneNum );
+		if ( phoneNum == 'james'){
+			alert("자동 요청 기능 시작되었습니다.");	
+			var index = 0;
+			var randInterval = Math.floor( Math.random() * 100 ) % 3 + 2; // 2~5초 사이 랜덤
+			var maxIndex = $("#phoneList tr").length;
+			var interval = setInterval(function() {
+				searchAutoList( index );
+				index++;		
+				
+				// 1000회 동작
+				if ( index > maxIndex ){
+					clearInterval(interval);
+					alert("자동 요청 기능 종료되었습니다!");	
+					$('#saveData').trigger("click");
+				}							
+			}, randInterval * 1000 );
+		}
+		else{
+			searchMulti( phoneNum );
+		}
 });
 
 // 전화번호 리스트 생성
